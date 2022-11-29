@@ -28,6 +28,12 @@ export enum ProjectStatus {
   STUCK = "STUCK",
 }
 
+export enum ProposalStatus {
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+  WAITING = "WAITING",
+}
+
 export enum StepStatus {
   DONE = "DONE",
   WAITING = "WAITING",
@@ -42,6 +48,12 @@ export enum UserRole {
 export interface ApproveProjectInput {
   active: ProjectActive;
   id: string;
+}
+
+export interface CheckProposalInput {
+  id: string;
+  note?: string | null;
+  status: ProposalStatus;
 }
 
 export interface CreateProjectInput {
@@ -84,6 +96,10 @@ export interface GetMyProjectsFilter {
 
 export interface GetProjectFilter {
   id: string;
+}
+
+export interface GetProposalsFilter {
+  project: string;
 }
 
 export interface GetRolesInput {

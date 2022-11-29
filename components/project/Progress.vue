@@ -1,5 +1,15 @@
 <template>
   <div>
+
+    <Teleport to="#actions">
+      <a-button type="primary" class="ml-4" @click="modalRef?.open()">
+        <template #icon>
+          <i-ic-baseline-check />
+        </template>
+        <span class="ml-1">Thêm Mới</span>
+      </a-button>
+    </Teleport>
+
     <div v-if="steps.length" class="flex">
       <div class="max-w-[600px] w-full flex-shrink-0">
         <draggable v-model="steps" item-key="id" group="steps">
