@@ -10,6 +10,7 @@
             message: 'Can not be empty',
             trigger: 'blur'
           }
+
         ]"
       >
         <a-input v-model:value="form.name" placeholder="Name..." />
