@@ -100,13 +100,12 @@ const { mutate, loading: updateProject } = useMutation<
 const updateHandle = async () => {
   try {
     const input: CreateProjectInput = await formRef.value?.submitForm()
-    const project = await mutate({
+    await mutate({
       input: {
         ...input,
         id: route.params.id as string
       }
     })
-    console.log(project)
   } catch (e) {
     // console.log(e)
   }
