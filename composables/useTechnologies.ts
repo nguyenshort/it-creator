@@ -1,4 +1,4 @@
-import {computed, ref, useQuery} from '#imports'
+import { computed, ref, useQuery } from '#imports'
 import {
   GetTechnologies,
   GetTechnologiesVariables
@@ -16,7 +16,10 @@ export const useTechnologies = () => {
 
   const { result, loading } = useQuery<GetTechnologies>(
     GET_TECHNOLOGIES,
-    filter
+    filter,
+    {
+      fetchPolicy: 'network-only'
+    }
   )
 
   const technologies = computed(() => result.value?.technologies || [])

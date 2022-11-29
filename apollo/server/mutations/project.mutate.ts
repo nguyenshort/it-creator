@@ -8,3 +8,25 @@ export const CREATE_PROJECT = gql`
         }
     }
 `
+
+
+export const UPDATE_PROJECT_INFO = gql`
+    mutation UpdateProjectInfo($input: UpdateProjectInput!) {
+        updateProject(input: $input) {
+            id
+            category {
+                id
+            }
+            logo
+            content
+            cover
+            estimate
+            name
+            technologies {
+                id
+                name
+            }
+            files
+        }
+    }
+`

@@ -3,32 +3,31 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetRolesInput, PermissionEnum } from "./../../__generated__/serverTypes";
+import { UpdateRoleInput, PermissionEnum } from "./../../__generated__/serverTypes";
 
 // ====================================================
-// GraphQL query operation: GetRoles
+// GraphQL mutation operation: UpdateRole
 // ====================================================
 
-export interface GetRoles_roles_user {
+export interface UpdateRole_updateRole_user {
   __typename: "User";
   id: string;
   name: string;
   avatar: string | null;
 }
 
-export interface GetRoles_roles {
+export interface UpdateRole_updateRole {
   __typename: "Role";
   id: string;
   name: string;
   permissions: PermissionEnum[];
-  createdAt: number;
-  user: GetRoles_roles_user | null;
+  user: UpdateRole_updateRole_user | null;
 }
 
-export interface GetRoles {
-  roles: GetRoles_roles[];
+export interface UpdateRole {
+  updateRole: UpdateRole_updateRole;
 }
 
-export interface GetRolesVariables {
-  filter: GetRolesInput;
+export interface UpdateRoleVariables {
+  input: UpdateRoleInput;
 }

@@ -2,14 +2,15 @@
   <div>
     <project-tab />
 
-    <project-info />
+    <project-info v-if="tab === 'info'" />
+    <project-permission v-else-if="tab === 'permission'" />
 
   </div>
 </template>
 
 <script lang="ts" setup>
 import {VERIFY_PROJECT} from "~/apollo/server/queries/proposal.query";
-import {useRouter, useAsyncQuery} from "#imports";
+import {useRouter, useAsyncQuery, computed} from "#imports";
 import {VerifyProject} from "~/apollo/server/queries/__generated__/VerifyProject";
 
 const router = useRouter()
@@ -21,6 +22,8 @@ const { data } = await useAsyncQuery<VerifyProject>(
       }
     }
 )
+
+const tab = computed(() => router.currentRoute.value.query.tab as string)
 
 // todo: Logo
 

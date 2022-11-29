@@ -52,6 +52,13 @@ export interface CreateProjectInput {
   technologies?: string[] | null;
 }
 
+export interface CreateRoleInput {
+  name: string;
+  permissions: PermissionEnum[];
+  project: string;
+  user?: string | null;
+}
+
 export interface GetMyProjectsFilter {
   active?: ProjectActive[] | null;
   category?: string | null;
@@ -65,6 +72,10 @@ export interface GetMyProjectsFilter {
 
 export interface GetProjectFilter {
   id: string;
+}
+
+export interface GetRolesInput {
+  project: string;
 }
 
 export interface GetTechnologiesFilter {
@@ -85,12 +96,37 @@ export interface RemoveProjectInput {
   id: string;
 }
 
+export interface RemoveRoleInput {
+  id: string;
+}
+
 export interface StudioCountProjectsFilter {
   active?: ProjectActive[] | null;
   category?: string | null;
   name?: string | null;
   status?: ProjectStatus | null;
   technologies?: string[] | null;
+}
+
+export interface UpdateProjectInput {
+  category?: string | null;
+  content?: string | null;
+  cover?: string | null;
+  estimate?: number[] | null;
+  files?: string[] | null;
+  id: string;
+  link?: string | null;
+  logo?: string | null;
+  name?: string | null;
+  status?: ProjectStatus | null;
+  technologies?: string[] | null;
+}
+
+export interface UpdateRoleInput {
+  id: string;
+  name?: string | null;
+  permissions?: PermissionEnum[] | null;
+  user?: string | null;
 }
 
 //==============================================================

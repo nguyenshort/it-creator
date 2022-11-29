@@ -95,10 +95,7 @@
           </a-form-item>
 
           <a-form-item name="estimate" label="Estimate">
-            <a-range-picker
-              class="w-full"
-              @change="changeEstimate"
-            />
+            <a-range-picker class="w-full" @change="changeEstimate" />
           </a-form-item>
         </div>
 
@@ -142,15 +139,10 @@
 
 <script lang="ts" setup>
 import { FormInstance } from 'ant-design-vue'
-import {
-  reactive,
-  ref,
-  useCategories,
-  useUploadFiles
-} from '#imports'
+import { reactive, ref, useCategories, useUploadFiles } from '#imports'
 import { CreateProjectInput } from '~/apollo/server/__generated__/serverTypes'
 import { useTechnologies } from '~/composables/useTechnologies'
-import {Dayjs} from "dayjs";
+import { Dayjs } from 'dayjs'
 
 const form = reactive<CreateProjectInput>({
   category: '',
@@ -235,7 +227,7 @@ const { open: openUploadAvatar } = useUploadFiles({
     loadingLogo.value = true
   },
   onDone: (_files) => {
-    if(_files.length) {
+    if (_files.length) {
       form.logo = _files[0]
     }
     loadingLogo.value = false
@@ -256,9 +248,15 @@ const submitForm = async () => {
   await formRef.value?.validateFields()
   return form
 }
+
+const setForm = (data: Record<string, any>) => {
+  Object.assign(form, data)
+}
+
 defineExpose({
   submitForm,
-  form
+  form,
+  setForm
 })
 </script>
 
