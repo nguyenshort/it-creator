@@ -3,25 +3,24 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetStepsFilter, StepStatus } from "./../../__generated__/serverTypes";
+import { UpdateStepInput, StepStatus } from "./../../__generated__/serverTypes";
 
 // ====================================================
-// GraphQL query operation: GetSteps
+// GraphQL mutation operation: UpdateStep
 // ====================================================
 
-export interface GetSteps_steps {
+export interface UpdateStep_updateStep {
   __typename: "Step";
   id: string;
   name: string;
   content: string;
   status: StepStatus;
-  order: number;
 }
 
-export interface GetSteps {
-  steps: GetSteps_steps[];
+export interface UpdateStep {
+  updateStep: UpdateStep_updateStep;
 }
 
-export interface GetStepsVariables {
-  filter: GetStepsFilter;
+export interface UpdateStepVariables {
+  input: UpdateStepInput;
 }

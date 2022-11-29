@@ -4,6 +4,7 @@
 
     <project-info v-if="tab === 'info'" />
     <project-permission v-else-if="tab === 'permission'" />
+    <project-progress v-else-if="tab === 'progress'" />
 
   </div>
 </template>

@@ -28,6 +28,11 @@ export enum ProjectStatus {
   STUCK = "STUCK",
 }
 
+export enum StepStatus {
+  DONE = "DONE",
+  WAITING = "WAITING",
+}
+
 export enum UserRole {
   ADMIN = "ADMIN",
   SP_ADMIN = "SP_ADMIN",
@@ -59,6 +64,13 @@ export interface CreateRoleInput {
   user?: string | null;
 }
 
+export interface CreateStepInput {
+  content?: string | null;
+  name: string;
+  project: string;
+  status?: StepStatus | null;
+}
+
 export interface GetMyProjectsFilter {
   active?: ProjectActive[] | null;
   category?: string | null;
@@ -75,6 +87,10 @@ export interface GetProjectFilter {
 }
 
 export interface GetRolesInput {
+  project: string;
+}
+
+export interface GetStepsFilter {
   project: string;
 }
 
@@ -98,6 +114,14 @@ export interface RemoveProjectInput {
 
 export interface RemoveRoleInput {
   id: string;
+}
+
+export interface RemoveStepInput {
+  id: string;
+}
+
+export interface SortStepsInput {
+  steps: string[];
 }
 
 export interface StudioCountProjectsFilter {
@@ -127,6 +151,13 @@ export interface UpdateRoleInput {
   name?: string | null;
   permissions?: PermissionEnum[] | null;
   user?: string | null;
+}
+
+export interface UpdateStepInput {
+  content?: string | null;
+  id: string;
+  name?: string | null;
+  status?: StepStatus | null;
 }
 
 //==============================================================
