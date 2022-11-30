@@ -24,7 +24,7 @@
               mode="inline"
               :style="{ height: '100%', borderRight: 0 }"
           >
-            <a-sub-menu key="sub1" @click="$router.push('/projects')">
+            <a-sub-menu key="sub1" @click="$router.push('/dashboard')">
               <template #title>
               <span class="flex items-center">
                 <Icon name="material-symbols:space-dashboard-rounded" />
