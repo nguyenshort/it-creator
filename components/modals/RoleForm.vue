@@ -57,6 +57,7 @@
       <a-form-item label="User" name="user">
         <div>
           <a-select
+            v-model:value="form.user"
             show-search
             placeholder="Enter user name"
             :default-active-first-option="false"
@@ -94,7 +95,7 @@ import {
   CreateRoleVariables
 } from '~/apollo/server/mutations/__generated__/CreateRole'
 import { FormInstance } from 'ant-design-vue'
-import { GetRoles, GetRoles_roles } from "~/apollo/server/queries/__generated__/GetRoles";
+import { GetRoles_roles } from "~/apollo/server/queries/__generated__/GetRoles";
 import { UpdateRole, UpdateRoleVariables } from "~/apollo/server/mutations/__generated__/UpdateRole";
 import { GET_ROLES } from "~/apollo/server/queries/roles.query";
 
