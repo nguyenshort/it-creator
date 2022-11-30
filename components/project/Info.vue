@@ -1,12 +1,20 @@
 <template>
   <div>
     <Teleport to="#actions">
-      <a-button type="danger">
-        <div class="flex items-center">
-          <Icon name="material-symbols:delete-outline" />
-          <span class="ml-1 font-semibold">Remove</span>
-        </div>
-      </a-button>
+      <a-popconfirm
+        v-if="$route.params.id"
+        title="Are you sure delete this task?"
+        ok-text="Yes"
+        cancel-text="No"
+        @confirm="removeProjectHandle({ input: { id: $route.params.id } })"
+      >
+        <a-button type="danger">
+          <div class="flex items-center">
+            <Icon name="material-symbols:delete-outline" />
+            <span class="ml-1 font-semibold">Remove</span>
+          </div>
+        </a-button>
+      </a-popconfirm>
 
       <a-button
         type="primary"
@@ -35,7 +43,8 @@ import {
   nextTick,
   useRoute,
   useNuxtApp,
-  useMutation
+  useMutation,
+  useRouter
 } from '#imports'
 import ProjectForm from '~/components/project/Form.vue'
 import { GET_PROJECT_INFO } from '~/apollo/server/queries/projects.query'
@@ -50,6 +59,11 @@ import {
   UpdateProjectInfo,
   UpdateProjectInfoVariables
 } from '~/apollo/server/mutations/__generated__/UpdateProjectInfo'
+import {
+  RemoveProject,
+  RemoveProjectVariables
+} from '~/apollo/server/mutations/__generated__/RemoveProject'
+import { REMOVE_PROJECT } from '~/apollo/server/mutations/projects.mutation'
 
 const route = useRoute()
 const { loading, result } = useQuery<GetProjectInfo, GetProjectInfoVariables>(
@@ -110,6 +124,23 @@ const updateHandle = async () => {
     // console.log(e)
   }
 }
+
+// Remove
+const {
+  mutate: removeProjectHandle,
+  loading: loadingDelete,
+  onDone: afterDelete
+} = useMutation<RemoveProject, RemoveProjectVariables>(REMOVE_PROJECT)
+
+const router = useRouter()
+afterDelete((val) => {
+  if (val.data?.removeProject) {
+    router.replace('/dashboard')
+    $apollo.defaultClient.cache.evict({
+      id: `Project:${val.data.removeProject.id}`
+    })
+  }
+})
 </script>
 
 <style scoped></style>
