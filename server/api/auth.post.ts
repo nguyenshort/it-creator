@@ -42,7 +42,8 @@ export default defineEventHandler(async (event) => {
       return {
         status: 401,
         body: {
-          message: 'Unauthorized - error'
+          message: 'Unauthorized - error',
+          error: e
         }
       }
     }
