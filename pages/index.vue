@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts" setup>
-import { definePageMeta, reactive } from '#imports'
+import { definePageMeta, reactive, useAppStore, useRouter, watch } from '#imports'
 
 definePageMeta({
   layout: 'blank'
@@ -127,6 +127,14 @@ const onFinish = async () => {
 }
 
 const googleSignIn = () => signInWithPopup(getAuth(), new GoogleAuthProvider())
+
+const appStore = useAppStore()
+const router = useRouter()
+watch(() => appStore.user, (user) => {
+  if (user) {
+    router.push('/dashboard')
+  }
+})
 </script>
 
 <style scoped></style>
