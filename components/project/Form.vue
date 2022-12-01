@@ -118,9 +118,6 @@
         <includes-editor ref="editorRef" :value="form.content" />
       </a-form-item>
     </a-form>
-
-    <button @click="submitForm">Submit</button>
-
     <modals-cropper
       ref="cropRef"
       :options="{
