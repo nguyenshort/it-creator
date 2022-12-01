@@ -130,8 +130,8 @@ const googleSignIn = () => signInWithPopup(getAuth(), new GoogleAuthProvider())
 
 const appStore = useAppStore()
 const router = useRouter()
-watch(() => appStore.user, (user) => {
-  if (user) {
+watch(() => appStore.user, (user, oldValue) => {
+  if (user && !oldValue) {
     router.push('/dashboard')
   }
 })
