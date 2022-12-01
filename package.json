@@ -7,7 +7,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "build:env": "sed 's/=.*/=/' .env > .env.example",
-    "stop": "pm2 stop it-client",
+    "stop": "pm2 stop it-creator",
     "apollo:codegen:server": "npx apollo codegen:generate --localSchemaFile=server@current.graphql --target=typescript --tagName=gql --includes=./apollo/server/**/*.ts --globalTypesFile=./apollo/server/__generated__/serverTypes.ts",
     "apollo:download": "npx apollo client:download-schema --endpoint=http://localhost:5001/graphql server@current.graphql"
   },
