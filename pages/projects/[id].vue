@@ -1,13 +1,6 @@
 <template>
   <div>
     <project-tab />
-
-    <Teleport to="#actions">
-      <a-button type="primary" @click="$router.push('/creator/new')">
-        Add New
-      </a-button>
-    </Teleport>
-
     <project-info v-if="tab === 'info'" />
     <project-permission v-else-if="tab === 'permission'" />
     <project-progress v-else-if="tab === 'progress'" />

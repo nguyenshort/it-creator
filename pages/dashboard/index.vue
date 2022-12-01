@@ -2,6 +2,12 @@
   <div>
     <lazy-projects-tab />
 
+    <Teleport to="#actions">
+      <a-button type="primary" @click="$router.push('/creator/new')">
+        Add New
+      </a-button>
+    </Teleport>
+
     <a-table
       :columns="columns"
       :data-source="projects"
