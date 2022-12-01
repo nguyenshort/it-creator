@@ -34,7 +34,7 @@
               <a-menu-item key="1"> List </a-menu-item>
             </a-sub-menu>
 
-            <a-menu-item key="sub3" @click.prevent.stop="logOut">
+            <a-menu-item key="sub3" @click="logOut">
             <span class="flex items-center">
               <Icon name="majesticons:logout-half-circle" />
               <span class="ml-1.5">Log Out</span>
@@ -62,7 +62,7 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import {ref, useSubscription} from "#imports"
+import {ref, useSubscription, useAppStore} from "#imports"
 
 const selectedKeys2 = ref<string[]>(['1'])
 const openKeys = ref<string[]>(['sub1'])
@@ -73,8 +73,12 @@ import { SubNotify } from "~/apollo/server/subscriptions/__generated__/SubNotify
 import { message } from "ant-design-vue"
 import 'ant-design-vue/lib/message/style/index.less'
 
+const app = useAppStore()
+
 const logOut = async () => {
+  await app.logOut()
   await signOut(getAuth())
+  location.href = '/'
 }
 
 const { onResult } = useSubscription<SubNotify>(SUB_NOTIFY)
