@@ -54,9 +54,11 @@ const props = withDefaults(defineProps<{
   options: Partial<VueCropperProps>
   autoClose?: boolean
   height?: number
+  endpoint?: string
 }>(), {
   autoClose: true,
   height: 400,
+  endpoint: 'logo'
 })
 
 const cropperRef = ref<VueCropperMethods>()
@@ -102,7 +104,7 @@ const uploadImage = async () => {
       const placeholder = URL.createObjectURL(data)
       emit('start', placeholder)
 
-      const url = await upload.image(data, 'logo')
+      const url = await upload.image(data, props.endpoint)
       URL.revokeObjectURL(placeholder)
       if (url) {
         emit('success', url)

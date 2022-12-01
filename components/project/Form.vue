@@ -132,6 +132,7 @@
         cropBoxMovable: false,
         aspectRatio: 12 / 7
       }"
+      endpoint="project"
       @success="form.cover = $event"
     />
   </div>
