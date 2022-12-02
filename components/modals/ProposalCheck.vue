@@ -89,18 +89,22 @@ const options = ref([
   },
   {
     value: ProposalStatus.APPROVED,
-    label: 'Approved'
+    label: 'Approve'
   },
   {
     value: ProposalStatus.REJECTED,
-    label: 'Rejected'
+    label: 'Rejecte'
   }
 ])
 
-const { mutate: checkProposal, loading: loadingCheck } = useMutation<
+const { mutate: checkProposal, loading: loadingCheck, onDone } = useMutation<
   CheckProposal,
   CheckProposalVariables
 >(CHECK_PROPOSAL)
+
+onDone(() => {
+  show.value = false
+})
 
 const open = (proposal: CheckProposalInput) => {
   form.value = proposal

@@ -1,6 +1,14 @@
 <template>
   <div>
     <project-form ref="formRef" />
+    <div class="flex justify-end">
+      <a-button type="primary" :loading="loading" @click="newProject">
+        <template #icon>
+          <Icon name="ic:baseline-cloud-upload" />
+        </template>
+        <span class="ml-1">Tải Lên</span>
+      </a-button>
+    </div>
 
     <Teleport to="#actions">
       <a-button type="primary" :loading="loading" @click="newProject">

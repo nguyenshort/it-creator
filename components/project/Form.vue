@@ -9,7 +9,7 @@
       autocomplete="off"
       :rules="rules"
     >
-      <a-form-item name="name" class="chapter-name" has-feedback>
+      <a-form-item name="name" class="chapter-name" label="Name" has-feedback>
         <a-input v-model:value="form.name" placeholder="Enter project name" />
       </a-form-item>
 
@@ -84,9 +84,6 @@
               show-search
               mode="tags"
               placeholder="Nhấn để thêm mới"
-              :default-active-first-option="false"
-              :show-arrow="false"
-              :filter-option="false"
               :not-found-content="null"
               :options="technologiesOption"
               @search="techFilter.filter.name = $event"

@@ -29,6 +29,15 @@
       </a-button>
     </Teleport>
 
+    <div class="flex justify-end">
+      <a-button type="primary" :loading="loading" @click="updateHandle">
+        <template #icon>
+          <Icon name="ic:baseline-cloud-upload" />
+        </template>
+        <span class="ml-1">Tải Lên</span>
+      </a-button>
+    </div>
+
     <a-spin :spinning="loading">
       <project-form ref="formRef" />
     </a-spin>
