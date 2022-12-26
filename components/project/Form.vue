@@ -99,10 +99,27 @@
         <div class="ml-16 w-full">
 
           <a-form-item label="Project Type" name="files">
-            <a-radio-group>
-              <a-radio :value="1">Personal</a-radio>
-              <a-radio :value="2">Enterprise</a-radio>
+            <a-radio-group v-model:value="form.enterprise">
+              <a-radio :value="false">Personal</a-radio>
+              <a-radio :value="true">Enterprise</a-radio>
             </a-radio-group>
+          </a-form-item>
+
+          <a-form-item label="Status" name="files">
+            <a-select
+              ref="select"
+              v-model:value="form.status"
+              style="width: 220px"
+            >
+              <a-select-option :value="ProjectStatus.PREPARE">Prepare</a-select-option>
+              <a-select-option :value="ProjectStatus.RUNNING">Running</a-select-option>
+              <a-select-option :value="ProjectStatus.STUCK">Stuck</a-select-option>
+              <a-select-option :value="ProjectStatus.DONE">Done</a-select-option>
+            </a-select>
+          </a-form-item>
+
+          <a-form-item label="Liên kết" name="link">
+            <a-input v-model:value="form.link" />
           </a-form-item>
 
           <a-form-item label="Documents" name="files">
@@ -143,11 +160,16 @@
 <script lang="ts" setup>
 import { FormInstance } from 'ant-design-vue'
 import { reactive, ref, useCategories, useUploadFiles } from '#imports'
-import { CreateProjectInput } from '~/apollo/server/__generated__/serverTypes'
+import { CreateProjectInput, ProjectStatus } from "~/apollo/server/__generated__/serverTypes";
 import { useTechnologies } from '~/composables/useTechnologies'
 import { Dayjs } from 'dayjs'
 
-const form = reactive<CreateProjectInput>({
+const props = defineProps<{
+  value: CreateProjectInput
+}>()
+
+const form = reactive<CreateProjectInput>(props.value || {
+  enterprise: false,
   category: '',
   logo: '',
   content: '',
@@ -155,7 +177,8 @@ const form = reactive<CreateProjectInput>({
   estimate: [],
   name: '',
   technologies: [],
-  files: []
+  files: [],
+  status: ProjectStatus.PREPARE
 })
 
 const rules = ref({

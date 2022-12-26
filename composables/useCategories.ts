@@ -1,4 +1,3 @@
-import { computed, useLazyAsyncQuery } from '#build/imports'
 import { GetCategories } from '~/apollo/server/queries/__generated__/GetCategories'
 import { GET_CATEGORIES } from '~/apollo/server/queries/categories.query'
 

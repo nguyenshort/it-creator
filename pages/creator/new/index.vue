@@ -1,6 +1,6 @@
 <template>
   <div>
-    <project-form ref="formRef" />
+    <project-form ref="formRef" v-model:value="form" />
     <div class="flex justify-end">
       <a-button type="primary" :loading="loading" @click="newProject">
         <template #icon>
@@ -30,8 +30,22 @@ import {
   CreateProject,
   CreateProjectVariables
 } from '~/apollo/server/mutations/__generated__/CreateProject'
+import { CreateProjectInput, ProjectStatus } from "~/apollo/server/__generated__/serverTypes";
 
 const formRef = ref<InstanceType<typeof ProjectForm>>()
+
+const form = ref<CreateProjectInput>({
+  enterprise: false,
+  category: '',
+  logo: '',
+  content: '',
+  cover: '',
+  estimate: [],
+  name: '',
+  technologies: [],
+  files: [],
+  status: ProjectStatus.PREPARE
+})
 
 const { mutate, loading } = useMutation<CreateProject, CreateProjectVariables>(
   CREATE_PROJECT
@@ -40,8 +54,8 @@ const { mutate, loading } = useMutation<CreateProject, CreateProjectVariables>(
 const router = useRouter()
 const newProject = async () => {
   try {
-    const input = await formRef.value?.submitForm()
-    const project = await mutate({ input })
+    await formRef.value?.submitForm()
+    const project = await mutate({ input: form.value })
     await router.push(`/projects/${project?.data?.createProject?.id}`)
   } catch (e) {
     // console.log(e)
