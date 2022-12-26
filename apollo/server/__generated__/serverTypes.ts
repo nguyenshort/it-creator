@@ -60,6 +60,7 @@ export interface CreateProjectInput {
   category: string;
   content?: string | null;
   cover: string;
+  enterprise?: boolean | null;
   estimate: number[];
   files?: string[] | null;
   link?: string | null;
@@ -152,6 +153,7 @@ export interface UpdateProjectInput {
   category?: string | null;
   content?: string | null;
   cover?: string | null;
+  enterprise?: boolean | null;
   estimate?: number[] | null;
   files?: string[] | null;
   id: string;

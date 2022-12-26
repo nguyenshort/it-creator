@@ -97,6 +97,14 @@
         </div>
 
         <div class="ml-16 w-full">
+
+          <a-form-item label="Project Type" name="files">
+            <a-radio-group>
+              <a-radio :value="1">Personal</a-radio>
+              <a-radio :value="2">Enterprise</a-radio>
+            </a-radio-group>
+          </a-form-item>
+
           <a-form-item label="Documents" name="files">
             <includes-upload-files v-model:value="form.files" />
 
