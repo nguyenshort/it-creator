@@ -213,7 +213,23 @@ const submitForm = async () => {
   show.value = false
 }
 
+const keyword = reactive<GetUsersVariables>({
+  filter: {
+    email: '',
+    sort: 'name',
+    offset: 0,
+    limit: 1
+  }
+})
+
+
 const open = (role?: GetRoles_roles) => {
+
+  keyword.filter.email = ''
+  isNoUser.value = true
+  currentUser.value = undefined
+  form.value.user = ''
+
   if (role) {
     form.value.id = role.id
     form.value.name = role.name
@@ -237,15 +253,6 @@ const open = (role?: GetRoles_roles) => {
 }
 
 // Tiìm kiếm thành viên
-const keyword = reactive<GetUsersVariables>({
-  filter: {
-    email: '',
-    sort: 'name',
-    offset: 0,
-    limit: 1
-  }
-})
-
 const currentUser = ref<GetUsers['users'][0]>()
 const isNoUser = ref(false)
 
@@ -255,9 +262,15 @@ onResult((data) => {
   if(keyword.filter.email) {
     const user = data?.data.users[0]
     if (user) {
-      isNoUser.value = false
-      currentUser.value = user
-      form.value.user = user.id
+      if(roles.value.findIndex(role => role.user?.id === user.id) !== -1) {
+        isNoUser.value = true
+        currentUser.value = undefined
+        form.value.user = ''
+      } else {
+        isNoUser.value = false
+        currentUser.value = user
+        form.value.user = user.id
+      }
     } else {
       isNoUser.value = true
       currentUser.value = undefined
