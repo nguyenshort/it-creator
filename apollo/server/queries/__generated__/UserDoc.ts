@@ -11,5 +11,6 @@ export interface UserDoc {
   __typename: "User";
   id: string;
   name: string;
+  email: string | null;
   avatar: string | null;
 }

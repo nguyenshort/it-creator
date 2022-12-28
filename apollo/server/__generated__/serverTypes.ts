@@ -71,10 +71,11 @@ export interface CreateProjectInput {
 }
 
 export interface CreateRoleInput {
+  content?: string | null;
+  count?: number | null;
   name: string;
   permissions: PermissionEnum[];
   project: string;
-  user?: string | null;
 }
 
 export interface CreateStepInput {
@@ -118,6 +119,7 @@ export interface GetTechnologiesFilter {
 }
 
 export interface GetUsersFilter {
+  email?: string | null;
   exclude?: string[] | null;
   limit: number;
   name?: string | null;
@@ -165,10 +167,11 @@ export interface UpdateProjectInput {
 }
 
 export interface UpdateRoleInput {
+  content?: string | null;
   id: string;
   name?: string | null;
   permissions?: PermissionEnum[] | null;
-  user?: string | null;
+  user: string;
 }
 
 export interface UpdateStepInput {

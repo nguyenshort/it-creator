@@ -21,6 +21,8 @@ export interface GetRoles_roles {
   id: string;
   name: string;
   permissions: PermissionEnum[];
+  content: string | null;
+  group: number | null;
   createdAt: number;
   user: GetRoles_roles_user | null;
 }

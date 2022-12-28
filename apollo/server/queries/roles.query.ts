@@ -4,6 +4,8 @@ export const GET_ROLES = gql`
             id
             name
             permissions
+            content
+            group
             createdAt
             user {
                 id

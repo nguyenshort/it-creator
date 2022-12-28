@@ -13,6 +13,7 @@ export interface GetUsers_users {
   __typename: "User";
   id: string;
   name: string;
+  email: string | null;
   avatar: string | null;
 }
 

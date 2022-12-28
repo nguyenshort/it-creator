@@ -13,6 +13,7 @@ export const GET_USERS = gql`
   fragment UserDoc on User {
     id
     name
+      email
     avatar
   }
   

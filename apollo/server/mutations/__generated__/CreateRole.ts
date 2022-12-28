@@ -26,7 +26,7 @@ export interface CreateRole_createRole {
 }
 
 export interface CreateRole {
-  createRole: CreateRole_createRole;
+  createRole: CreateRole_createRole[];
 }
 
 export interface CreateRoleVariables {
