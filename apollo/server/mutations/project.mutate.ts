@@ -27,6 +27,9 @@ export const UPDATE_PROJECT_INFO = gql`
                 name
             }
             files
+            enterprise
+            link
+            status
         }
     }
 `

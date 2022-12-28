@@ -39,7 +39,7 @@
     </div>
 
     <a-spin :spinning="loading">
-      <project-form ref="formRef" />
+      <project-form ref="formRef" v-model:value="form" />
     </a-spin>
   </div>
 </template>
@@ -49,7 +49,6 @@ import {
   ref,
   useQuery,
   watch,
-  nextTick,
   useRoute,
   useNuxtApp,
   useMutation,
@@ -61,7 +60,7 @@ import {
   GetProjectInfo,
   GetProjectInfoVariables
 } from '~/apollo/server/queries/__generated__/GetProjectInfo'
-import { CreateProjectInput } from '~/apollo/server/__generated__/serverTypes'
+import { CreateProjectInput, ProjectStatus } from "~/apollo/server/__generated__/serverTypes";
 import { GET_TECHNOLOGIES } from '~/apollo/server/queries/technology.query'
 import { UPDATE_PROJECT_INFO } from '~/apollo/server/mutations/project.mutate'
 import {
@@ -84,6 +83,20 @@ const { loading, result } = useQuery<GetProjectInfo, GetProjectInfoVariables>(
   }
 )
 
+const form = ref<CreateProjectInput>({
+  enterprise: false,
+  category: '',
+  logo: '',
+  content: '',
+  cover: '',
+  estimate: [],
+  name: '',
+  technologies: [],
+  files: [],
+  status: ProjectStatus.PREPARE,
+  link: '',
+})
+
 const formRef = ref<InstanceType<typeof ProjectForm>>()
 
 const { $apollo } = useNuxtApp()
@@ -94,22 +107,24 @@ watch(
       const _clone = JSON.parse(JSON.stringify(result.value.studioProject))
       delete _clone.__typename
       delete _clone.id
-      const _form: CreateProjectInput = {
+
+      form.value = {
         ..._clone,
         category: _clone.category.id,
         technologies: _clone.technologies.map((item: any) => item.id)
       }
-      nextTick(() => {
-        $apollo.defaultClient.writeQuery({
-          query: GET_TECHNOLOGIES,
-          data: {
-            technologies: result.value?.studioProject.technologies
-          }
-        })
-        setTimeout(() => {
-          formRef.value?.setForm(_form)
-        }, 300)
+
+      setTimeout(() => {
+        formRef.value?.setContent(form.value.content)
+      }, 1000)
+
+      $apollo.defaultClient.writeQuery({
+        query: GET_TECHNOLOGIES,
+        data: {
+          technologies: result.value?.studioProject.technologies
+        }
       })
+
     }
   },
   { immediate: true }

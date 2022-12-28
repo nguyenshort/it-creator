@@ -44,7 +44,8 @@ const form = ref<CreateProjectInput>({
   name: '',
   technologies: [],
   files: [],
-  status: ProjectStatus.PREPARE
+  status: ProjectStatus.PREPARE,
+  link: '',
 })
 
 const { mutate, loading } = useMutation<CreateProject, CreateProjectVariables>(

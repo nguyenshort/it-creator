@@ -88,11 +88,14 @@
               :options="technologiesOption"
               @search="techFilter.filter.name = $event"
             >
+              <template #removeIcon>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon" width="1em" height="1em" viewBox="0 0 24 24" data-v-4fa0a2a1="" data-v-6d06fcec=""><path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6Z"></path></svg>
+              </template>
             </a-select>
           </a-form-item>
 
           <a-form-item name="estimate" label="Estimate">
-            <a-range-picker class="w-full" @change="changeEstimate" />
+            <a-range-picker v-model:value="timeRange" class="w-full" @change="changeEstimate" />
           </a-form-item>
         </div>
 
@@ -159,10 +162,12 @@
 
 <script lang="ts" setup>
 import { FormInstance } from 'ant-design-vue'
-import { reactive, ref, useCategories, useUploadFiles, useTinymce, toRaw, watch } from "#imports";
+import { ref, useCategories, useUploadFiles, useTinymce, toRaw, watch, useNuxtApp } from "#imports";
 import { CreateProjectInput, ProjectStatus } from "~/apollo/server/__generated__/serverTypes";
 import { useTechnologies } from '~/composables/useTechnologies'
 import { Dayjs } from 'dayjs'
+
+const { $dayjs } = useNuxtApp()
 
 const props = defineProps<{
   value: CreateProjectInput
@@ -175,7 +180,7 @@ const { getContent, setContent, value } = useTinymce({
   autoInit: true
 })
 
-const form = reactive<CreateProjectInput>(toRaw(props.value) || {
+const form = ref<CreateProjectInput>(toRaw(props.value) || {
   enterprise: false,
   category: '',
   logo: '',
@@ -188,15 +193,22 @@ const form = reactive<CreateProjectInput>(toRaw(props.value) || {
   status: ProjectStatus.PREPARE
 })
 
+const timeRange = ref<Dayjs[]>(form.value.estimate.map((e) => $dayjs(e)))
+
+watch(() => props.value, (val) => {
+  form.value = toRaw(val)
+  timeRange.value = form.value.estimate.map((e) => $dayjs(e))
+})
+
 watch(value, (val) => {
-  form.content = val
+  form.value.content = val
 })
 
 const emit = defineEmits<{
   (e: 'update:value', value: CreateProjectInput): void
 }>()
 watch(() => form, (value) => {
-  emit('update:value', value)
+  emit('update:value', value.value)
 }, { deep: true })
 
 const rules = ref({
@@ -228,7 +240,7 @@ const rules = ref({
     {
       message: 'Thời gian ước tính là bắt buộc',
       validator: async () => {
-        if (form.estimate?.length !== 2) {
+        if (form.value.estimate?.length !== 2) {
           return Promise.reject('Thời gian ước tính là bắt buộc')
         }
         return Promise.resolve()
@@ -239,7 +251,7 @@ const rules = ref({
     {
       message: 'Vui lòng chọn công nghệ',
       validator: async () => {
-        if (!form.technologies?.length) {
+        if (!form.value.technologies?.length) {
           return Promise.reject('Vui lòng chọn kĩ năng')
         }
         return Promise.resolve()
@@ -258,7 +270,7 @@ const { options: categoriesOption } = useCategories()
 const { options: technologiesOption, filter: techFilter } = useTechnologies()
 
 const changeEstimate = (dates: [Dayjs, Dayjs]) => {
-  form.estimate = [dates[0].unix(), dates[1].unix()]
+  form.value.estimate = [dates[0].unix(), dates[1].unix()]
 }
 
 // avatar
@@ -272,7 +284,7 @@ const { open: openUploadAvatar } = useUploadFiles({
   },
   onDone: (_files) => {
     if (_files.length) {
-      form.logo = _files[0]
+      form.value.logo = _files[0]
     }
     loadingLogo.value = false
   }
@@ -281,12 +293,13 @@ const { open: openUploadAvatar } = useUploadFiles({
 // crop banner
 const cropRef = ref()
 
+//
 const formRef = ref<FormInstance>()
 
 const submitForm = async () => {
-  form.content = getContent()
+  form.value.content = getContent()
   await formRef.value?.validateFields()
-  return form
+  return form.value
 }
 
 const setForm = (data: Record<string, any>) => {

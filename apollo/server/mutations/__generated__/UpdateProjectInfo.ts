@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UpdateProjectInput } from "./../../__generated__/serverTypes";
+import { UpdateProjectInput, ProjectStatus } from "./../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL mutation operation: UpdateProjectInfo
@@ -31,6 +31,9 @@ export interface UpdateProjectInfo_updateProject {
   name: string;
   technologies: UpdateProjectInfo_updateProject_technologies[];
   files: string[];
+  enterprise: boolean | null;
+  link: string | null;
+  status: ProjectStatus;
 }
 
 export interface UpdateProjectInfo {

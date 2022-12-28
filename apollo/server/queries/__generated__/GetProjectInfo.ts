@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetProjectFilter } from "./../../__generated__/serverTypes";
+import { GetProjectFilter, ProjectStatus } from "./../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL query operation: GetProjectInfo
@@ -31,6 +31,9 @@ export interface GetProjectInfo_studioProject {
   name: string;
   technologies: GetProjectInfo_studioProject_technologies[];
   files: string[];
+  link: string | null;
+  enterprise: boolean | null;
+  status: ProjectStatus;
 }
 
 export interface GetProjectInfo {

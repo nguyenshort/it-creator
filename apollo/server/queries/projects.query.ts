@@ -51,6 +51,9 @@ export const GET_PROJECT_INFO = gql`
         name
       }
       files
+      link
+      enterprise
+      status
     }
   }
 `
