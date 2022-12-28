@@ -193,11 +193,11 @@ const form = ref<CreateProjectInput>(toRaw(props.value) || {
   status: ProjectStatus.PREPARE
 })
 
-const timeRange = ref<Dayjs[]>(form.value.estimate.map((e) => $dayjs(e)))
+const timeRange = ref<Dayjs[]>(form.value.estimate.map((e) => $dayjs.unix(e)))
 
 watch(() => props.value, (val) => {
   form.value = toRaw(val)
-  timeRange.value = form.value.estimate.map((e) => $dayjs(e))
+  timeRange.value = form.value.estimate.map((e) => $dayjs.unix(e))
 })
 
 watch(value, (val) => {

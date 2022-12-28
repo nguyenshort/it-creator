@@ -55,7 +55,11 @@ const { open } = useUploadFiles({
 
 watch(files, () => {
   emit('update:value', files.value)
-})
+}, { deep: true })
+
+watch(props, () => {
+  files.value = props.value
+}, { deep: true })
 
 const removeFile = (file: string) => {
   files.value = files.value.filter((f) => f !== file)
