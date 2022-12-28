@@ -10,6 +10,7 @@ export const GET_ROLES = gql`
             user {
                 id
                 name
+                email
                 avatar
             }
         }

@@ -180,7 +180,7 @@ const submitForm = async () => {
   }
 
   if(form.value.id) {
-    const _input = getInput(['project'])
+    const _input = getInput(['project', 'count'])
 
     await updateMutation({
       input: _input
@@ -220,6 +220,10 @@ const open = (role?: GetRoles_roles) => {
     form.value.content = role.content
     form.value.permissions = role.permissions
     form.value.user = role.user?.id || ''
+
+    if(role.user) {
+      currentUser.value = role.user
+    }
   } else {
     form.value = {
       name: '',

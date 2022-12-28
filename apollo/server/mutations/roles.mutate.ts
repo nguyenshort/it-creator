@@ -20,9 +20,11 @@ export const UPDATE_ROLE = gql`
             id
             name
             permissions
+            content
             user {
                 id
                 name
+                email
                 avatar
             }
         }
