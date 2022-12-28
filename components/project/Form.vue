@@ -137,7 +137,7 @@
       </div>
 
       <a-form-item label="Detail" name="content">
-        <includes-editor ref="editorRef" :value="form.content" />
+        <textarea id="projecteditor"></textarea>
       </a-form-item>
     </a-form>
     <modals-cropper
@@ -159,7 +159,7 @@
 
 <script lang="ts" setup>
 import { FormInstance } from 'ant-design-vue'
-import { reactive, ref, useCategories, useUploadFiles } from '#imports'
+import { reactive, ref, useCategories, useUploadFiles, useTinymce, toRaw, watch } from "#imports";
 import { CreateProjectInput, ProjectStatus } from "~/apollo/server/__generated__/serverTypes";
 import { useTechnologies } from '~/composables/useTechnologies'
 import { Dayjs } from 'dayjs'
@@ -168,7 +168,14 @@ const props = defineProps<{
   value: CreateProjectInput
 }>()
 
-const form = reactive<CreateProjectInput>(props.value || {
+const { getContent, setContent, value } = useTinymce({
+  options: {
+    selector: '#projecteditor',
+  },
+  autoInit: true
+})
+
+const form = reactive<CreateProjectInput>(toRaw(props.value) || {
   enterprise: false,
   category: '',
   logo: '',
@@ -180,6 +187,17 @@ const form = reactive<CreateProjectInput>(props.value || {
   files: [],
   status: ProjectStatus.PREPARE
 })
+
+watch(value, (val) => {
+  form.content = val
+})
+
+const emit = defineEmits<{
+  (e: 'update:value', value: CreateProjectInput): void
+}>()
+watch(() => form, (value) => {
+  emit('update:value', value)
+}, { deep: true })
 
 const rules = ref({
   category: [
@@ -263,14 +281,10 @@ const { open: openUploadAvatar } = useUploadFiles({
 // crop banner
 const cropRef = ref()
 
-// Magic editor
-const editorRef = ref()
-
 const formRef = ref<FormInstance>()
 
 const submitForm = async () => {
-  const content = editorRef.value?.getContent()
-  form.content = content || ''
+  form.content = getContent()
   await formRef.value?.validateFields()
   return form
 }
@@ -282,7 +296,8 @@ const setForm = (data: Record<string, any>) => {
 defineExpose({
   submitForm,
   form,
-  setForm
+  setForm,
+  setContent
 })
 </script>
 
