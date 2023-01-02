@@ -3,7 +3,7 @@
     <Teleport to="#actions">
       <a-popconfirm
         v-if="$route.params.id"
-        title="Are you sure delete this task?"
+        :title="$t('project.info.actions.deleteConfirm')"
         ok-text="Yes"
         cancel-text="No"
         @confirm="removeProjectHandle({ input: { id: $route.params.id } })"
@@ -11,7 +11,9 @@
         <a-button type="danger">
           <div class="flex items-center">
             <Icon name="material-symbols:delete-outline" />
-            <span class="ml-1 font-semibold">Remove</span>
+            <span class="ml-1 font-semibold">
+              {{ $t('project.info.actions.delete') }}
+            </span>
           </div>
         </a-button>
       </a-popconfirm>
@@ -25,7 +27,9 @@
         <template #icon>
           <Icon name="ic:baseline-cloud-upload" />
         </template>
-        <span class="ml-1 font-semibold"> Update </span>
+        <span class="ml-1 font-semibold">
+          {{ $t('project.info.actions.update') }}
+        </span>
       </a-button>
     </Teleport>
 

@@ -62,6 +62,11 @@ export default defineNuxtPlugin((nuxtApp) => {
             link: 'Link',
             documents: 'Documents',
             ownerInfo: 'Owner Info',
+            actions: {
+              deleteConfirm: 'Are you sure delete this project?',
+              delete: 'Delete',
+              update: 'Update'
+            }
           }
         }
       }
