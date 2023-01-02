@@ -13,10 +13,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         },
         projects: {
           addNew: 'Add New',
-          all: 'All',
-          active: 'Active',
-          draft: 'Draft',
-          blocked: 'Blocked',
           table: {
             name: 'Name',
             status: 'Status',
@@ -25,6 +21,16 @@ export default defineNuxtPlugin((nuxtApp) => {
             createdAt: 'Created At',
             deleteConfirm: 'Are you sure delete this task?',
           }
+        },
+        tabs: {
+          all: 'All',
+          active: 'Active',
+          draft: 'Draft',
+          blocked: 'Blocked',
+          info: 'Info',
+          members: 'Members',
+          progress: 'Progress',
+          proposal: 'Proposal',
         },
         project: {
           active: {
@@ -37,13 +43,6 @@ export default defineNuxtPlugin((nuxtApp) => {
             prepare: 'Prepare',
             running: 'Running',
             stuck: 'Stuck'
-          },
-          tab: {
-            all: 'All',
-            info: 'Info',
-            members: 'Members',
-            progress: 'Progress',
-            proposal: 'Proposal',
           },
           info: {
             name: 'Name',
@@ -67,6 +66,32 @@ export default defineNuxtPlugin((nuxtApp) => {
               delete: 'Delete',
               update: 'Update'
             }
+          },
+          permissions: {
+            updateProject: 'Update Project',
+            removeProject: 'Remove Project',
+            createRole: 'Create Role',
+            updateRole: 'Update Role',
+            removeRole: 'Remove Role'
+          },
+          members: {
+            name: 'Name',
+            member: 'Member',
+            permissions: 'Permissions',
+            createdAt: 'Created At',
+            action: 'Action',
+            modal: {
+              title: 'Add New',
+              name: 'Role name',
+              permissions: 'Permissions',
+              count: 'Count',
+              des: 'Description',
+              user: 'User'
+            },
+            addNew: 'Add New'
+          },
+          process: {
+
           }
         }
       }

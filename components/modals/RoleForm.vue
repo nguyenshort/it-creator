@@ -1,17 +1,17 @@
 <template>
-  <a-modal v-model:visible="show" :title="'Add New'" @ok="submitForm">
+  <a-modal v-model:visible="show" :title="$t('project.members.modal.title')" @ok="submitForm">
 
-    <div
-      v-if="form.id"
-      class="text-white bg-primary-500 px-3 py-1 rounded mb-3"
-    >
-      Adjusting role will create a new role independenly
-    </div>
+<!--    <div-->
+<!--      v-if="form.id"-->
+<!--      class="text-white bg-primary-500 px-3 py-1 rounded mb-3"-->
+<!--    >-->
+<!--      Adjusting role will create a new role independenly-->
+<!--    </div>-->
 
     <a-form ref="formRef" layout="vertical" :model="form">
       <a-form-item
         name="name"
-        label="Role Name"
+        :label="$t('project.members.modal.name')"
         :rules="[
           {
             required: true,
@@ -20,36 +20,46 @@
           }
         ]"
       >
-        <a-input v-model:value="form.name" placeholder="Name..." />
+        <a-input v-model:value="form.name" placeholder="" />
       </a-form-item>
 
-      <a-form-item name="permissions" label="Permissions">
+      <a-form-item name="permissions" :label="$t('project.members.modal.permissions')">
         <a-checkbox-group v-model:value="form.permissions" style="width: 100%">
           <a-row>
             <a-col :span="8" class="mb-1.5">
               <a-checkbox :value="PermissionEnum.UPDATE_PROJECT">
-                <span>Update Project</span>
+                <span>
+                  {{ $t('project.permissions.updateProject') }}
+                </span>
               </a-checkbox>
             </a-col>
             <a-col :span="8" class="mb-1.5">
               <a-checkbox :value="PermissionEnum.REMOVE_PROJECT">
-                <span>Remove Project</span>
+                <span>
+                  {{ $t('project.permissions.removeProject') }}
+                </span>
               </a-checkbox>
             </a-col>
 
             <a-col :span="8" class="mb-1.5">
               <a-checkbox :value="PermissionEnum.CREATE_ROLE">
-                <span>Create Role</span>
+                <span>
+                  {{ $t('project.permissions.createRole') }}
+                </span>
               </a-checkbox>
             </a-col>
             <a-col :span="8" class="mb-1.5">
               <a-checkbox :value="PermissionEnum.UPDATE_ROLE">
-                <span>Update Role</span>
+                <span>
+                  {{ $t('project.permissions.updateRole') }}
+                </span>
               </a-checkbox>
             </a-col>
             <a-col :span="8" class="mb-1.5">
               <a-checkbox :value="PermissionEnum.REMOVE_ROLE">
-                <span>Delete Role</span>
+                <span>
+                  {{ $t('project.permissions.removeRole') }}
+                </span>
               </a-checkbox>
             </a-col>
           </a-row>
@@ -59,22 +69,22 @@
       <a-form-item
         v-if="!form.id"
         name="content"
-        label="Số lượng vị trí"
+        :label="$t('project.members.modal.count')"
       >
-        <a-input-number v-model:value="form.count" :min="1" placeholder="Số lượng..." class="!w-full" />
+        <a-input-number v-model:value="form.count" :min="1" placeholder="" class="!w-full" />
       </a-form-item>
 
       <a-form-item
         name="content"
-        label="Mô tả dự án"
+        :label="$t('project.members.modal.des')"
       >
-        <a-textarea v-model:value="form.content" placeholder="Mô tả vị trí..." />
+        <a-textarea v-model:value="form.content" placeholder="" />
       </a-form-item>
 
       <a-form-item
         v-if="form.id"
         name="user"
-        label="User"
+        :label="$t('project.members.modal.user')"
       >
 
         <div v-if="currentUser" class="flex items-center">

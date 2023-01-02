@@ -5,11 +5,18 @@
         <template #icon>
           <i-ic-baseline-check />
         </template>
-        <span class="ml-1">Thêm Mới</span>
+        <span class="ml-1">
+          {{ $t('project.members.addNew') }}
+        </span>
       </a-button>
     </Teleport>
 
     <a-table :columns="columns" :data-source="roles" :loading="loadingRole">
+
+      <template #headerCell="{ column }">
+        {{ $t(`project.members.${column.key}`) }}
+      </template>
+
       <template #emptyText>
         <div class="py-10 pt-5 text-center">
           <div style="width: 300px; height: 250px" class="mx-auto">
@@ -19,9 +26,6 @@
               loop
               path="https://assets4.lottiefiles.com/packages/lf20_ij2ngolf.json"
             />
-            <div class="text-[11px] text-gray-400">
-              This project have no roles now...
-            </div>
           </div>
         </div>
       </template>
@@ -38,32 +42,32 @@
         <template v-if="column.key === 'permissions'">
           <span v-for="(premit, index) in record.permissions" :key="index">
             <a-tag v-if="premit === PermissionEnum.REMOVE_PROJECT" color="#f50">
-              Delete Project
+              {{ $t('project.permissions.removeProject') }}
             </a-tag>
             <a-tag
               v-else-if="premit === PermissionEnum.UPDATE_PROJECT"
               color="#2db7f5"
             >
-              Update Project
+              {{ $t('project.permissions.updateProject') }}
             </a-tag>
 
             <a-tag
               v-else-if="premit === PermissionEnum.CREATE_ROLE"
               color="#87d068"
             >
-              Create Role
+              {{ $t('project.permissions.createRole') }}
             </a-tag>
             <a-tag
               v-else-if="premit === PermissionEnum.UPDATE_ROLE"
               color="#108ee9"
             >
-              Update Role
+              {{ $t('project.permissions.updateRole') }}
             </a-tag>
             <a-tag
               v-else-if="premit === PermissionEnum.REMOVE_ROLE"
               color="#f50"
             >
-              Remove Role
+              {{ $t('project.permissions.removeRole') }}
             </a-tag>
           </span>
         </template>
@@ -125,7 +129,7 @@ const columns = [
   {
     title: 'Member',
     dataIndex: 'user',
-    key: 'user',
+    key: 'member',
     align: 'center'
   },
   {
