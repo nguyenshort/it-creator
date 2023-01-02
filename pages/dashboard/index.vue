@@ -4,7 +4,7 @@
 
     <Teleport to="#actions">
       <a-button type="primary" @click="$router.push('/creator/new')">
-        Add New
+        {{ $t('projects.addNew') }}
       </a-button>
     </Teleport>
 
@@ -28,6 +28,9 @@
             @change="onSearch"
           />
         </template>
+        <template v-else>
+          {{ $t(`projects.table.${column.key}`) }}
+        </template>
       </template>
 
       <template #bodyCell="{ column, record }">
@@ -39,43 +42,43 @@
 
         <template v-if="column.key === 'active'">
           <a-tag v-if="record.active === ProjectActive.ACTIVE" color="#f50">
-            Active
+            {{ $t('project.active.active') }}
           </a-tag>
           <a-tag
             v-else-if="record.active === ProjectActive.DISABLED"
             color="#87d068"
           >
-            Disabled
+            {{ $t('project.active.disabled') }}
           </a-tag>
           <a-tag
             v-else-if="record.active === ProjectActive.DRAFT"
             color="#108ee9"
           >
-            Draft
+            {{ $t('project.active.draft') }}
           </a-tag>
         </template>
 
         <template v-if="column.key === 'status'">
           <a-tag v-if="record.status === ProjectStatus.DONE" color="#f50">
-            Done
+            {{ $t('project.status.done') }}
           </a-tag>
           <a-tag
             v-else-if="record.status === ProjectStatus.PREPARE"
             color="#87d068"
           >
-            Prepare
+            {{ $t('project.status.done') }}
           </a-tag>
           <a-tag
             v-else-if="record.status === ProjectStatus.RUNNING"
             color="#108ee9"
           >
-            Running
+            {{ $t('project.status.done') }}
           </a-tag>
           <a-tag
             v-else-if="record.status === ProjectStatus.STUCK"
             color="#2db7f5"
           >
-            Stuck
+            {{ $t('project.status.stuck') }}
           </a-tag>
         </template>
 
@@ -98,7 +101,7 @@
             </a-button>
 
             <a-popconfirm
-              title="Are you sure delete this task?"
+              :title="$t('projects.table.deleteConfirm')"
               ok-text="Yes"
               cancel-text="No"
               @confirm="removeProjectHandle({ input: { id: record.id } })"
@@ -166,36 +169,36 @@ const app = useAppStore()
 
 const columns = [
   {
-    title: 'Name',
+    title: 'name',
     dataIndex: 'name',
     key: 'name'
   },
   {
-    title: 'Category',
+    title: 'category',
     dataIndex: ['category', 'name'],
     key: 'category',
     align: 'center'
   },
   {
-    title: 'Active',
+    title: 'active',
     dataIndex: 'active',
     key: 'active',
     align: 'center'
   },
   {
-    title: 'Status',
+    title: 'status',
     dataIndex: 'status',
     key: 'status',
     align: 'center'
   },
   {
-    title: 'Created At',
+    title: 'createdAt',
     key: 'createdAt',
     dataIndex: 'createdAt',
     align: 'center'
   },
   {
-    title: 'Action',
+    title: 'action',
     key: 'action',
     align: 'right'
   }

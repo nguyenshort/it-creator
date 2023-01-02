@@ -123,7 +123,7 @@ const columns = [
     key: 'name'
   },
   {
-    title: 'User',
+    title: 'Member',
     dataIndex: 'user',
     key: 'user',
     align: 'center'

@@ -41,16 +41,22 @@
               <template #title>
               <span class="flex items-center">
                 <Icon name="material-symbols:space-dashboard-rounded" />
-                <span class="ml-1.5">Projects</span>
+                <span class="ml-1.5">
+                  {{ $t('sidebar.projects') }}
+                </span>
               </span>
               </template>
-              <a-menu-item key="1"> List </a-menu-item>
+              <a-menu-item key="1">
+                {{ $t('sidebar.list') }}
+              </a-menu-item>
             </a-sub-menu>
 
             <a-menu-item key="sub3" @click="logOut">
               <span class="flex items-center">
                 <Icon name="majesticons:logout-half-circle" />
-                <span class="ml-1.5">Log Out</span>
+                <span class="ml-1.5">
+                  {{ $t('sidebar.logOut') }}
+                </span>
               </span>
             </a-menu-item>
 

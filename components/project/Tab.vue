@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from "#imports";
+import {ref} from "#imports"
 
 const tabs = ref([
   {
