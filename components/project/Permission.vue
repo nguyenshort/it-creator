@@ -79,7 +79,7 @@
         <template v-if="column.key === 'action'">
           <div>
             <a-popconfirm
-              title="Are you sure delete this position?"
+              :title="$t('project.members.deleteConfirm')"
               ok-text="Yes"
               cancel-text="No"
               placement="bottomLeft"

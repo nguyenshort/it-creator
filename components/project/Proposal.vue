@@ -9,6 +9,11 @@
       }"
       :loading="loading"
     >
+
+      <template #headerCell="{ column }">
+        {{ $t(`project.proposal.${column.title}`) }}
+      </template>
+
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'user'">
           <div v-if="record.user" class="flex items-center">
@@ -20,7 +25,9 @@
 
         <template v-if="column.key === 'resume'">
           <a v-if="record.resume" :href="$cdn(record.resume)" target="_blank">
-            <a-tag color="#87d068"> Download </a-tag>
+            <a-tag color="#87d068">
+              {{ $t('project.proposal.download') }}
+            </a-tag>
           </a>
         </template>
 
@@ -30,19 +37,19 @@
 
         <template v-if="column.key === 'status'">
           <a-tag v-if="record.status === ProposalStatus.WAITING" color="#f50">
-            Waiting
+            {{ $t(`project.proposal.waitting`) }}
           </a-tag>
           <a-tag
             v-if="record.status === ProposalStatus.REJECTED"
             color="#2db7f5"
           >
-            Rejected
+            {{ $t(`project.proposal.rejected`) }}
           </a-tag>
           <a-tag
             v-if="record.status === ProposalStatus.APPROVED"
             color="#108ee9"
           >
-            Approved
+            {{ $t(`project.proposal.approved`) }}
           </a-tag>
         </template>
 
@@ -100,44 +107,44 @@ import { ProposalStatus } from '~/apollo/server/__generated__/serverTypes'
 
 const columns = [
   {
-    title: 'Cendidate',
+    title: 'cendidate',
     dataIndex: 'user',
     key: 'user',
     width: 230
   },
   {
-    title: 'Position',
+    title: 'position',
     dataIndex: ['role', 'name'],
     key: 'role.name',
     align: 'center'
   },
   {
-    title: 'Status',
+    title: 'status',
     dataIndex: 'status',
     key: 'status',
     align: 'center'
   },
   {
-    title: 'Resume',
+    title: 'resume',
     dataIndex: 'resume',
     key: 'resume',
     align: 'center'
   },
   {
-    title: 'Note',
+    title: 'note',
     dataIndex: 'note',
     key: 'note',
     align: 'center'
   },
   {
-    title: 'Created At',
+    title: 'createdAt',
     key: 'createdAt',
     dataIndex: 'createdAt',
     align: 'center',
     width: 180
   },
   {
-    title: 'Action',
+    title: 'action',
     key: 'action',
     align: 'right',
     width: 120

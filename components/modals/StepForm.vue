@@ -1,13 +1,13 @@
 <template>
   <a-modal
     v-model:visible="show"
-    title="Tuỳ Chỉnh Quyền"
+    :title="$t('project.process.modal.title')"
     :confirm-loading="loading"
     @ok="submitHandle"
   >
     <a-form ref="formRef" layout="vertical" :model="form">
       <a-form-item
-        label="Tên Tiến Độ"
+        :label="$t('project.process.modal.name')"
         name="name"
         :rules="[
           {
@@ -17,15 +17,17 @@
           }
         ]"
       >
-        <a-input v-model:value="form.name" placeholder="Tên tiến độ" />
+        <a-input v-model:value="form.name" />
       </a-form-item>
 
-      <a-form-item label="Trạng Thái" name="status">
-        <a-select v-model:value="form.status" placeholder="Trạng thái bước làm">
+      <a-form-item :label="$t('project.process.modal.status')" name="status">
+        <a-select v-model:value="form.status">
           <a-select-option :value="StepStatus.WAITING">
-            Sẽ Làm
+            {{ $t('project.process.modal.waitting') }}
           </a-select-option>
-          <a-select-option :value="StepStatus.DONE"> Đã Làm </a-select-option>
+          <a-select-option :value="StepStatus.DONE">
+            {{ $t('project.process.modal.done') }}
+          </a-select-option>
         </a-select>
 
         <template #extra>
@@ -35,10 +37,9 @@
         </template>
       </a-form-item>
 
-      <a-form-item label="Mô Tả" name="content">
+      <a-form-item :label="$t('project.process.modal.des')" name="content">
         <a-textarea
           v-model:value="form.content"
-          placeholder="Autosize height with minimum and maximum number of lines"
           :auto-size="{ minRows: 2, maxRows: 5 }"
         />
       </a-form-item>

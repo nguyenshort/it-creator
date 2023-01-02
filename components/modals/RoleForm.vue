@@ -106,7 +106,7 @@
         <div v-else>
           <a-input
             v-model:value="keyword.filter.email"
-            placeholder="Enter an email for searching..."
+            placeholder="Email..."
           >
             <template #prefix>
               <div class="mr-2">
@@ -115,9 +115,6 @@
               </div>
             </template>
           </a-input>
-
-          <div v-if="isNoUser && keyword.filter.email" class="text-[12px] text-gray-500">We can't recognize any user with this email</div>
-
         </div>
       </a-form-item>
     </a-form>

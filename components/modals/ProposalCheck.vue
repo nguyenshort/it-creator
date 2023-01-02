@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-model:visible="show"
-    title="Thay Đổi"
+    :title="$t(`project.proposal.modal.title`)"
     :confirm-loading="loadingCheck"
     @ok="
       checkProposal({
@@ -45,17 +45,16 @@
                 : 'font-normal text-gray-600'
             ]"
           >
-            {{ item.label }}
+            {{ $t(`project.proposal.${item.value}`.toLowerCase()) }}
           </span>
         </div>
       </li>
     </ul>
 
     <div>
-      <h4>Note:</h4>
+      <h4>{{ $t(`project.proposal.modal.note`) }}:</h4>
       <a-textarea
         v-model:value="form.note"
-        placeholder="Autosize height with minimum and maximum number of lines"
         :auto-size="{ minRows: 3, maxRows: 5 }"
       />
     </div>

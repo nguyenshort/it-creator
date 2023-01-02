@@ -78,6 +78,32 @@
         </a-layout>
       </a-layout>
     </client-only>
+
+    <div class="change-langs">
+      <div class="flex items-center text-[30px] mt-4">
+        <div
+          class="cursor-pointer transition duration-300 ease-in-out"
+          :class="{
+              'opacity-40': $i18n.locale !== 'jp'
+            }"
+          @click="$i18n.locale = 'jp'"
+        >
+          <Icon name="twemoji:flag-for-flag-japan" />
+        </div>
+
+        <div
+          class="cursor-pointer transition duration-300 ease-in-out ml-5"
+          :class="{
+              'opacity-40': $i18n.locale !== 'en'
+            }"
+          @click="$i18n.locale = 'en'"
+        >
+          <Icon name="twemoji:flag-for-flag-united-states" />
+        </div>
+
+      </div>
+    </div>
+
   </a-layout>
 </template>
 <script lang="ts" setup>
@@ -125,5 +151,11 @@ const openNewPage = () => {
 }
 .site-layout-background {
   background: #fff;
+}
+
+.change-langs {
+  position: fixed;
+  bottom: 15px;
+  left: 20px;
 }
 </style>

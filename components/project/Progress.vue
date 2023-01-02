@@ -6,7 +6,9 @@
         <template #icon>
           <i-ic-baseline-check />
         </template>
-        <span class="ml-1">Thêm Mới</span>
+        <span class="ml-1">
+          {{ $t('project.process.addNew') }}
+        </span>
       </a-button>
     </Teleport>
 
