@@ -66,13 +66,13 @@
             v-else-if="record.status === ProjectStatus.PREPARE"
             color="#87d068"
           >
-            {{ $t('project.status.done') }}
+            {{ $t('project.status.prepare') }}
           </a-tag>
           <a-tag
             v-else-if="record.status === ProjectStatus.RUNNING"
             color="#108ee9"
           >
-            {{ $t('project.status.done') }}
+            {{ $t('project.status.running') }}
           </a-tag>
           <a-tag
             v-else-if="record.status === ProjectStatus.STUCK"

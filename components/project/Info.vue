@@ -32,7 +32,9 @@
     <a-spin :spinning="loading">
       <project-form ref="formRef" v-model:value="form">
         <template #afterfiles>
-          <h4>Thông tin người đăng</h4>
+          <h4>
+            {{ $t('project.info.ownerInfo') }}
+          </h4>
           <div class="flex items-center">
             <a-avatar
               :src="$cdn(result?.studioProject?.owner?.avatar)"

@@ -9,13 +9,13 @@
       autocomplete="off"
       :rules="rules"
     >
-      <a-form-item name="name" class="chapter-name" label="Name" has-feedback>
-        <a-input v-model:value="form.name" placeholder="Enter project name" />
+      <a-form-item name="name" class="chapter-name" :label="$t('project.info.name')" has-feedback>
+        <a-input v-model:value="form.name" :placeholder="$t('project.info.namePlaceholder')" />
       </a-form-item>
 
       <div class="flex">
         <div class="w-[450px] flex-shrink-0">
-          <a-form-item label="Logo" name="logo">
+          <a-form-item :label="$t('project.info.logo')" name="logo">
             <div class="w-[60px]">
               <a-spin :spinning="loadingLogo">
                 <div
@@ -36,16 +36,10 @@
                 </div>
               </a-spin>
             </div>
-
-            <template #extra>
-              <p class="mb-0 mt-2 text-[11px] text-gray-400 opacity-75">
-                - You picture will be resized when uploading to server.
-              </p>
-            </template>
           </a-form-item>
 
           <a-form-item
-            label="Cover"
+            :label="$t('project.info.cover')"
             name="cover"
             class="aspect-w-12 aspect-h-7 relative"
           >
@@ -74,25 +68,26 @@
             <button
               v-if="!loadingLogo && form.cover"
               class="absolute top-0 right-0 bg-primary-500 h-[30px] text-white w-[120px] rounded-md"
-            >Tải Lên</button>
+            >
+              {{ $t('project.info.uploadCover') }}
+            </button>
 
           </a-form-item>
 
-          <a-form-item label="Category" name="category">
+          <a-form-item label="Category" :name="$t('project.info.category')">
             <a-select
               v-model:value="form.category"
-              placeholder="Phân loại dự án"
+              :placeholder="$t('project.info.categoryPlaceholder')"
               :options="categoriesOption"
             ></a-select>
           </a-form-item>
 
-          <a-form-item name="technologies" label="Programing lang, framework">
+          <a-form-item name="technologies" :label="$t('project.info.tech')">
             <!-- Dùng loop -->
             <a-select
               v-model:value="form.technologies"
               show-search
               mode="tags"
-              placeholder="Nhấn để thêm mới"
               :not-found-content="null"
               :options="technologiesOption"
               @search="techFilter.filter.name = $event"
@@ -103,47 +98,51 @@
             </a-select>
           </a-form-item>
 
-          <a-form-item name="estimate" label="Estimate">
+          <a-form-item name="estimate" :label="$t('project.info.estimate')">
             <a-range-picker v-model:value="timeRange" class="w-full" @change="changeEstimate" />
           </a-form-item>
         </div>
 
         <div class="ml-16 w-full">
 
-          <a-form-item label="Project Type" name="files">
+          <a-form-item :label="$t('project.info.type')">
             <a-radio-group v-model:value="form.enterprise">
-              <a-radio :value="false">Personal</a-radio>
-              <a-radio :value="true">Enterprise</a-radio>
+              <a-radio :value="false">
+                {{ $t('project.info.typePersonal') }}
+              </a-radio>
+              <a-radio :value="true">
+                {{ $t('project.info.typeEnterprise') }}
+              </a-radio>
             </a-radio-group>
           </a-form-item>
 
-          <a-form-item label="Status" name="files">
+          <a-form-item :label="$t('project.info.status')" name="files">
             <a-select
               ref="select"
               v-model:value="form.status"
               style="width: 220px"
             >
-              <a-select-option :value="ProjectStatus.PREPARE">Prepare</a-select-option>
-              <a-select-option :value="ProjectStatus.RUNNING">Running</a-select-option>
-              <a-select-option :value="ProjectStatus.STUCK">Stuck</a-select-option>
-              <a-select-option :value="ProjectStatus.DONE">Done</a-select-option>
+              <a-select-option :value="ProjectStatus.PREPARE">
+                {{ $t('project.status.prepare') }}
+              </a-select-option>
+              <a-select-option :value="ProjectStatus.RUNNING">
+                {{ $t('project.status.running') }}
+              </a-select-option>
+              <a-select-option :value="ProjectStatus.STUCK">
+                {{ $t('project.status.stuck') }}
+              </a-select-option>
+              <a-select-option :value="ProjectStatus.DONE">
+                {{ $t('project.status.done') }}
+              </a-select-option>
             </a-select>
           </a-form-item>
 
-          <a-form-item label="Liên kết" name="link">
+          <a-form-item :label="$t('project.info.link')" name="link">
             <a-input v-model:value="form.link" />
           </a-form-item>
 
-          <a-form-item label="Documents" name="files">
+          <a-form-item :label="$t('project.info.documents')" name="files">
             <includes-upload-files v-model:value="form.files" />
-
-            <template #extra>
-              <small>
-                - Click button to pick your pictures.
-                <br />
-                - You can arrange your documents by dragging later.
-              </small>
-            </template>
           </a-form-item>
 
           <slot name="afterfiles"></slot>

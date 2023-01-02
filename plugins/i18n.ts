@@ -37,6 +37,31 @@ export default defineNuxtPlugin((nuxtApp) => {
             prepare: 'Prepare',
             running: 'Running',
             stuck: 'Stuck'
+          },
+          tab: {
+            all: 'All',
+            info: 'Info',
+            members: 'Members',
+            progress: 'Progress',
+            proposal: 'Proposal',
+          },
+          info: {
+            name: 'Name',
+            namePlaceholder: 'Enter project name',
+            logo: 'Logo',
+            cover: 'Cover',
+            uploadCover: 'Upload Cover',
+            category: 'Category',
+            categoryPlaceholder: 'Select category',
+            tech: 'Programing lang, framework',
+            estimate: 'Estimated Time',
+            type: 'Project Type',
+            typePersonal: 'Personal',
+            typeEnterprise: 'Enterprise',
+            status: 'Status',
+            link: 'Link',
+            documents: 'Documents',
+            ownerInfo: 'Owner Info',
           }
         }
       }

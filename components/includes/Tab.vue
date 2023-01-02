@@ -7,7 +7,7 @@
       class="tab-nav"
   >
     <a-menu-item v-for="item in tabs" :key="item.key">
-      {{ $t('projects.' + (item.tab.toLowerCase() || 'all')) }}
+      {{ $t('project.tab.' + (item.tab.toLowerCase() || 'all')) }}
     </a-menu-item>
   </a-menu>
 </template>

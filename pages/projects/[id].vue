@@ -14,7 +14,7 @@ import { useRouter, useAsyncQuery, computed } from '#imports'
 import { VerifyProject } from '~/apollo/server/queries/__generated__/VerifyProject'
 
 const router = useRouter()
-const { data } = await useAsyncQuery<VerifyProject>(VERIFY_PROJECT, {
+await useAsyncQuery<VerifyProject>(VERIFY_PROJECT, {
   filter: {
     id: router.currentRoute.value.params.id as string
   }
