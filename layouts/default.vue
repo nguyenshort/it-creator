@@ -9,11 +9,23 @@
         >
           IT Square
         </h1>
+
+        <Icon
+          class="text-white ml-3 text-[22px] cursor-pointer"
+          name="ic:baseline-home"
+          @click="openNewPage"
+        />
+
       </div>
 
       <div id="tabs" class="w-full"></div>
 
       <div id="actions" class="ml-auto flex flex-shrink-0 items-center"></div>
+
+      <button class="ml-5">
+        <a-avatar :src="$cdn(app?.user?.avatar)" />
+      </button>
+
     </a-layout-header>
     <client-only>
       <a-layout>
@@ -24,6 +36,7 @@
               mode="inline"
               :style="{ height: '100%', borderRight: 0 }"
           >
+
             <a-sub-menu key="sub1" @click="$router.push('/dashboard')">
               <template #title>
               <span class="flex items-center">
@@ -35,10 +48,10 @@
             </a-sub-menu>
 
             <a-menu-item key="sub3" @click="logOut">
-            <span class="flex items-center">
-              <Icon name="majesticons:logout-half-circle" />
-              <span class="ml-1.5">Log Out</span>
-            </span>
+              <span class="flex items-center">
+                <Icon name="majesticons:logout-half-circle" />
+                <span class="ml-1.5">Log Out</span>
+              </span>
             </a-menu-item>
 
           </a-menu>
@@ -92,6 +105,11 @@ onResult((result) => {
     }
   }
 })
+
+
+const openNewPage = () => {
+  window.open('https://it.smileeye.edu.vn/', '_blank')
+}
 
 </script>
 <style>

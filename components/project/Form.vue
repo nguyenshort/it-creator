@@ -51,7 +51,7 @@
           >
             <a-spin :spinning="false">
               <div
-                class="aspect-w-12 aspect-h-7 relative w-full cursor-pointer overflow-hidden rounded-md bg-primary-50"
+                class="aspect-w-12 aspect-h-7 relative w-full cursor-pointer overflow-hidden rounded-md bg-primary-50 relative"
                 @click="cropRef.open?.()"
               >
                 <img
@@ -61,12 +61,21 @@
                   class="absolute inset-0 h-full w-full object-cover"
                 />
                 <div
-                  class="absolute flex h-full w-full items-center justify-center bg-primary-600 text-[40px] text-white opacity-0 transition hover:opacity-100"
+                  class="absolute flex h-full w-full items-center justify-center bg-primary-600 text-[40px] text-white opacity-0 transition"
+                  :class="{
+                    'hover:opacity-100': !form.cover,
+                  }"
                 >
                   <Icon name="ic:baseline-cloud-upload" />
                 </div>
               </div>
             </a-spin>
+
+            <button
+              v-if="!loadingLogo && form.cover"
+              class="absolute top-0 right-0 bg-primary-500 h-[30px] text-white w-[120px] rounded-md"
+            >Tải Lên</button>
+
           </a-form-item>
 
           <a-form-item label="Category" name="category">
@@ -136,6 +145,9 @@
               </small>
             </template>
           </a-form-item>
+
+          <slot name="afterfiles"></slot>
+
         </div>
       </div>
 

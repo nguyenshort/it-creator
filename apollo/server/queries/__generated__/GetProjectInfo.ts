@@ -14,6 +14,14 @@ export interface GetProjectInfo_studioProject_category {
   id: string;
 }
 
+export interface GetProjectInfo_studioProject_owner {
+  __typename: "User";
+  id: string;
+  name: string;
+  email: string | null;
+  avatar: string | null;
+}
+
 export interface GetProjectInfo_studioProject_technologies {
   __typename: "Technology";
   id: string;
@@ -24,6 +32,7 @@ export interface GetProjectInfo_studioProject {
   __typename: "Project";
   id: string;
   category: GetProjectInfo_studioProject_category;
+  owner: GetProjectInfo_studioProject_owner;
   logo: string | null;
   content: string | null;
   cover: string;

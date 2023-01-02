@@ -86,6 +86,7 @@
         <template v-else-if="column.key === 'action'">
           <div>
             <a-button
+              v-if="app.user.role === UserRole.ADMIN"
               type="primary"
               size="small"
               class="mr-2"
@@ -131,8 +132,8 @@
 import {
   ApproveProjectInput,
   ProjectActive,
-  ProjectStatus
-} from '~/apollo/server/__generated__/serverTypes'
+  ProjectStatus, UserRole
+} from "~/apollo/server/__generated__/serverTypes";
 import {
   computed,
   reactive,
@@ -141,8 +142,8 @@ import {
   useSearchTable,
   useRoute,
   useMutation,
-  useNuxtApp
-} from '#imports'
+  useNuxtApp, useAppStore
+} from "#imports";
 import {
   GetProjects,
   GetProjectsVariables
@@ -160,6 +161,8 @@ import {
   RemoveProjectVariables
 } from '~/apollo/server/mutations/__generated__/RemoveProject'
 import { REMOVE_PROJECT } from '~/apollo/server/mutations/projects.mutation'
+
+const app = useAppStore()
 
 const columns = [
   {

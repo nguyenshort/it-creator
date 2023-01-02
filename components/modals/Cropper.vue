@@ -71,7 +71,7 @@ const emit = defineEmits<{
   (event: 'success', value: string): void
 }>()
 
-const { files, open } = useFileDialog({
+const { files, open, reset } = useFileDialog({
   accept: 'image/*',
   multiple: false
 })
@@ -118,8 +118,13 @@ const uploadImage = async () => {
   }
 }
 
+const openPicker = () => {
+  reset()
+  open()
+}
+
 defineExpose({
-  open
+  open: openPicker
 })
 </script>
 

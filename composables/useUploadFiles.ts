@@ -10,7 +10,7 @@ interface Props extends UseFileDialogOptions {
 }
 export const useUploadFiles = (props: Props) => {
   const upload = useUpload()
-  const { open, files } = useFileDialog(props)
+  const { open, files, reset } = useFileDialog(props)
   const uploadFiles = async () => {
     try {
       props.onStart?.(files.value)
@@ -38,9 +38,19 @@ export const useUploadFiles = (props: Props) => {
       await props.onErr?.(e)
     }
   }
-  watch(files, () => uploadFiles())
+  watch(files, async () => {
+    if (files.value?.length) {
+      await uploadFiles()
+    }
+  })
+
+  const openPicker = () => {
+    console.log('openPicker')
+    reset()
+    open()
+  }
 
   return {
-    open
+    open: openPicker
   }
 }

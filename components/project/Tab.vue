@@ -13,8 +13,8 @@ const tabs = ref([
     tab: 'Info'
   },
   {
-    key: 'permission',
-    tab: 'Permission'
+    key: 'members',
+    tab: 'Members'
   },
   {
     key: 'progress',

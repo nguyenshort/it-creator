@@ -29,17 +29,24 @@
       </a-button>
     </Teleport>
 
-    <div class="flex justify-end">
-      <a-button type="primary" :loading="loading" @click="updateHandle">
-        <template #icon>
-          <Icon name="ic:baseline-cloud-upload" />
-        </template>
-        <span class="ml-1">Tải Lên</span>
-      </a-button>
-    </div>
-
     <a-spin :spinning="loading">
-      <project-form ref="formRef" v-model:value="form" />
+      <project-form ref="formRef" v-model:value="form">
+        <template #afterfiles>
+          <h4>Thông tin người đăng</h4>
+          <div class="flex items-center">
+            <a-avatar
+              :src="$cdn(result?.studioProject?.owner?.avatar)"
+              class="mr-2"
+              size="large"
+            />
+
+            <h5 class="ml-2">{{ result?.studioProject?.owner?.name }}</h5>
+          </div>
+
+          <div>Email: {{ result?.studioProject?.owner?.email }}</div>
+
+        </template>
+      </project-form>
     </a-spin>
   </div>
 </template>
@@ -138,12 +145,14 @@ const { mutate, loading: updateProject } = useMutation<
 const updateHandle = async () => {
   try {
     const input: CreateProjectInput = await formRef.value?.submitForm()
+    delete input.owner
     await mutate({
       input: {
         ...input,
         id: route.params.id as string
       }
     })
+    await router.replace('/dashboard')
   } catch (e) {
     // console.log(e)
   }

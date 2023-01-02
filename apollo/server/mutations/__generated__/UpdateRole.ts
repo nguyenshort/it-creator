@@ -13,6 +13,7 @@ export interface UpdateRole_updateRole_user {
   __typename: "User";
   id: string;
   name: string;
+  email: string | null;
   avatar: string | null;
 }
 
@@ -21,6 +22,7 @@ export interface UpdateRole_updateRole {
   id: string;
   name: string;
   permissions: PermissionEnum[];
+  content: string | null;
   user: UpdateRole_updateRole_user | null;
 }
 

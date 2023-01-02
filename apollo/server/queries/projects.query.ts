@@ -41,6 +41,12 @@ export const GET_PROJECT_INFO = gql`
       category {
         id
       }
+        owner {
+            id
+            name
+            email
+            avatar
+        }
       logo
       content
       cover

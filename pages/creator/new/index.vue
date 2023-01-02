@@ -56,8 +56,8 @@ const router = useRouter()
 const newProject = async () => {
   try {
     await formRef.value?.submitForm()
-    const project = await mutate({ input: form.value })
-    await router.push(`/projects/${project?.data?.createProject?.id}`)
+    await mutate({ input: form.value })
+    await router.replace('/dashboard')
   } catch (e) {
     // console.log(e)
   }
