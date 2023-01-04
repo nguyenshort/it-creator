@@ -7,6 +7,7 @@ export const GET_ROLES = gql`
             content
             group
             createdAt
+            order
             user {
                 id
                 name

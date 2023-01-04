@@ -38,3 +38,12 @@ export const REMOVE_ROLE = gql`
         }
     }
 `
+
+export const SORT_ROLE = gql`
+    mutation SortRole($input: SortRolesInput!) {
+        sortRoles(input: $input) {
+            id
+            order
+        }
+    }
+`

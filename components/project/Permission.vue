@@ -1,6 +1,11 @@
 <template>
   <div>
     <Teleport to="#actions">
+
+      <a-button type="primary" @click="show = true">
+        <Icon name="ph:sort-ascending-bold" />
+      </a-button>
+
       <a-button type="primary" class="ml-4" @click="modalRef?.open()">
         <template #icon>
           <i-ic-baseline-check />
@@ -108,17 +113,46 @@
     </a-table>
 
     <lazy-modals-role-form ref="modalRef" />
+
+    <a-modal title="Sort Members" v-model:visible="show" @ok="submitSortRoles">
+
+      <client-only>
+
+
+        <draggable
+          v-model="pos"
+          item-key="id"
+          group="people"
+        >
+          <template #item="{ element }">
+            <div class="flex items-center justify-between py-1.5 hover:bg-gray-100">
+              <div>
+                {{ element.name }}
+              </div>
+
+              <Icon name="akar-icons:three-line-horizontal" class="flex-shrink-0 ml-4" />
+
+            </div>
+          </template>
+        </draggable>
+
+      </client-only>
+
+    </a-modal>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useRoute, useRoles, ref, useMutation, useNuxtApp } from '#imports'
+import { useRoute, useRoles, ref, useMutation, useNuxtApp, watch } from '#imports'
 import { PermissionEnum } from '~/apollo/server/__generated__/serverTypes'
-import { REMOVE_ROLE } from '~/apollo/server/mutations/roles.mutate'
+import { REMOVE_ROLE, SORT_ROLE } from "~/apollo/server/mutations/roles.mutate";
 import {
   RemoveRole,
   RemoveRoleVariables
 } from '~/apollo/server/mutations/__generated__/RemoveRole'
+import { GetRoles_roles } from "~/apollo/server/queries/__generated__/GetRoles";
+import { SortRole, SortRoleVariables } from "~/apollo/server/mutations/__generated__/SortRole";
 
 const columns = [
   {
@@ -152,9 +186,20 @@ const columns = [
 ]
 
 const route = useRoute()
-const { roles, loading: loadingRole } = useRoles(route.params.id as string)
+const { roles, loading: loadingRole, positions } = useRoles(route.params.id as string)
+
+const pos = ref<GetRoles_roles[]>([])
+
+watch(roles, () => {
+  pos.value = roles.value.map((role) => ({
+    ...role,
+    id: role.id
+  }))
+}, { deep: true })
 
 const modalRef = ref()
+
+const show = ref(false)
 
 const { mutate: removeRole, onDone: afteRemove } = useMutation<
   RemoveRole,
@@ -167,6 +212,16 @@ afteRemove((val) => {
     $apollo.defaultClient.cache.evict({ id: `Role:${val.data.removeRole.id}` })
   }
 })
+
+const { mutate } = useMutation<SortRole, SortRoleVariables>(SORT_ROLE)
+
+const submitSortRoles = () => {
+  show.value = false
+  mutate({ input: {
+    roles: pos.value.map((e) => e.id)
+    } })
+}
+
 </script>
 
 <style scoped></style>

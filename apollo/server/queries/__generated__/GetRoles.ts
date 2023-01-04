@@ -25,6 +25,7 @@ export interface GetRoles_roles {
   content: string | null;
   group: number | null;
   createdAt: number;
+  order: number;
   user: GetRoles_roles_user | null;
 }
 

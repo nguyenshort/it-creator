@@ -139,6 +139,10 @@ export interface RemoveStepInput {
   id: string;
 }
 
+export interface SortRolesInput {
+  roles: string[];
+}
+
 export interface SortStepsInput {
   steps: string[];
 }
