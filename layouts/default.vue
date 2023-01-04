@@ -1,7 +1,7 @@
 <template>
   <a-layout class="default-layout h-screen">
     <a-layout-header class="header -mx-[23px] flex items-center">
-      <div class="logo flex flex-shrink-0 items-center">
+      <nuxt-link to="/" class="logo flex flex-shrink-0 items-center">
         <img src="/images/logo.png" alt="" class="w-[32px]" />
         <h1
             class="mb-0 ml-2.5 text-[20px] font-bold text-white"
@@ -10,13 +10,15 @@
           IT Square
         </h1>
 
-        <Icon
-          class="text-white ml-3 text-[22px] cursor-pointer"
-          name="ic:baseline-home"
-          @click="openNewPage"
-        />
+        <a href="https://it.smileeye.edu.vn/">
+          <Icon
+            class="text-white ml-3 text-[22px] cursor-pointer"
+            name="ic:baseline-home"
+            @click="openNewPage"
+          />
+        </a>
 
-      </div>
+      </nuxt-link>
 
       <div id="tabs" class="w-full"></div>
 
