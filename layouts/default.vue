@@ -3,7 +3,7 @@
     <a-layout-header class="header -mx-[23px] flex items-center">
       <client-only>
         <nuxt-link to="/dashboard" class="logo flex flex-shrink-0 items-center">
-          <img src="/images/logo.png" alt="" class="w-[32px]" />
+          <img src="/images/logo.svg" alt="" class="w-[32px]" />
           <h1
             class="mb-0 ml-2.5 text-[20px] font-bold text-white"
             style="font-family: Dancing Script, cursive"
