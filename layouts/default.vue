@@ -14,7 +14,6 @@
           <Icon
             class="text-white ml-3 text-[22px] cursor-pointer"
             name="ic:baseline-home"
-            @click="openNewPage"
           />
         </a>
 
