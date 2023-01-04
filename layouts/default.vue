@@ -1,23 +1,25 @@
 <template>
   <a-layout class="default-layout h-screen">
     <a-layout-header class="header -mx-[23px] flex items-center">
-      <nuxt-link to="/dashboard" class="logo flex flex-shrink-0 items-center">
-        <img src="/images/logo.png" alt="" class="w-[32px]" />
-        <h1
+      <client-only>
+        <nuxt-link to="/dashboard" class="logo flex flex-shrink-0 items-center">
+          <img src="/images/logo.png" alt="" class="w-[32px]" />
+          <h1
             class="mb-0 ml-2.5 text-[20px] font-bold text-white"
             style="font-family: Dancing Script, cursive"
-        >
-          IT Square
-        </h1>
+          >
+            IT Square
+          </h1>
 
-        <a href="https://it.smileeye.edu.vn/">
-          <Icon
-            class="text-white ml-3 text-[22px] cursor-pointer"
-            name="ic:baseline-home"
-          />
-        </a>
+          <a href="https://it.smileeye.edu.vn/">
+            <Icon
+              class="text-white ml-3 text-[22px] cursor-pointer"
+              name="ic:baseline-home"
+            />
+          </a>
 
-      </nuxt-link>
+        </nuxt-link>
+      </client-only>
 
       <div id="tabs" class="w-full"></div>
 
