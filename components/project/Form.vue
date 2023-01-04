@@ -258,17 +258,6 @@ const rules = ref({
       }
     }
   ],
-  technologies: [
-    {
-      message: 'Vui lòng chọn công nghệ',
-      validator: async () => {
-        if (!form.value.technologies?.length) {
-          return Promise.reject('Vui lòng chọn kĩ năng')
-        }
-        return Promise.resolve()
-      }
-    }
-  ],
   name: [
     {
       required: true,
