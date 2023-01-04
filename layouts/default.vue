@@ -11,14 +11,12 @@
             IT Square
           </h1>
 
-          <a href="https://it.smileeye.edu.vn/">
+        </nuxt-link>
+        <a href="https://it.smileeye.edu.vn/" class="text-white ml-3 text-[22px] cursor-pointer block mr-8">
             <Icon
-              class="text-white ml-3 text-[22px] cursor-pointer"
               name="ic:baseline-home"
             />
           </a>
-
-        </nuxt-link>
       </client-only>
 
       <div id="tabs" class="w-full"></div>
@@ -149,7 +147,7 @@ const openNewPage = () => {
 </script>
 <style>
 .default-layout .logo {
-  width: 193px;
+  width: 133px;
   height: 31px;
 }
 .site-layout-background {
